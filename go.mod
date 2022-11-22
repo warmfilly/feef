@@ -2,7 +2,10 @@ module github.com/warmfilly/feef
 
 go 1.19
 
-require github.com/rivo/tview v0.0.0-20221117065207-09f052e6ca98
+require (
+	github.com/dustin/go-humanize v1.0.0
+	github.com/rivo/tview v0.0.0-20221117065207-09f052e6ca98
+)
 
 require (
 	github.com/gdamore/encoding v1.0.0 // indirect
