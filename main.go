@@ -1,41 +1,24 @@
 package main
 
 import (
-	"fmt"
-	"os"
-
-	"github.com/76creates/stickers"
-	tea "github.com/charmbracelet/bubbletea"
+	"github.com/rivo/tview"
 )
 
 func main() {
-	headers := []string{"File"}
-	m := Model{
-		table: stickers.NewTableSingleType[string](50, 10, headers),
-	}
+	table := getTable()
 
-	ratio := []int{1}
-	//minSize := []int{4, 5, 5, 2, 5}
-	m.table.SetRatio(ratio)
-
-	rows := getRows()
-	m.table.AddRows(rows)
-
-	p := tea.NewProgram(m, tea.WithAltScreen())
-
-	if _, err := p.Run(); err != nil {
-		fmt.Printf("Error: %v", err)
-		os.Exit(1)
+	if err := tview.NewApplication().SetRoot(table, true).Run(); err != nil {
+		panic(err)
 	}
 }
 
-func getRows() [][]string {
-	var matrix [][]string
-	row1 := []string{"one"}
-	row2 := []string{"two"}
+func getTable() *tview.Table {
+	table := tview.NewTable().
+		SetBorders(true).
+		SetCell(0, 0, tview.NewTableCell("Cell One")).
+		SetCell(0, 1, tview.NewTableCell("Cell Two")).
+		SetCell(1, 0, tview.NewTableCell("Cell Three")).
+		SetCell(1, 1, tview.NewTableCell("Cell Four"))
 
-	matrix = append(matrix, row1)
-	matrix = append(matrix, row2)
-
-	return matrix
+	return table
 }
